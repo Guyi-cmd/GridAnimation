@@ -1,0 +1,86 @@
+<input type="checkbox">
+<svg width="400" height="400">
+    <!-- stroke边框线 -->
+    <circle fill="none" stroke="#68e534" stroke-linecap="round" stroke-width="20"
+     cx="200" cy="200" r="190" class="circle" transform="rotate(-90 200 200)"></circle>
+    <!-- points  多边形节点坐标 -->
+    <polyline fill="none" stroke="#68e534" stroke-width="24" points="88,214 173,284 304,138" stroke-linecap="round"
+        stroke-linejoin="round" class="tick"></polyline>
+</svg>
+<h2>Payment Success</h2>
+<style>
+    /* vh就是当前屏幕可见高度的1%，也就是说
+
+height:100vh == height:100%;
+
+但是有个好处是当元素没有内容时候，设置height:100%该元素不会被撑开，
+
+但是设置height:100vh，该元素会被撑开屏幕高度一致。
+
+ */
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+    h2{
+        font-family: Helvetica;
+        font-size: 36px;
+        margin-top: 40px;
+        color: #333;
+        opacity: 0;
+    }
+    .circle{
+        /* 1194 圆的周长 */
+        stroke-dasharray: 1194;
+        stroke-dashoffset: 1194;
+    }
+    input[type="checkbox"]:checked + svg .circle{
+        animation: circle 1s ease-in-out;
+        /* 让动画定格在最后一秒 */
+        animation-fill-mode: forwards;
+    }
+    .tick{
+        stroke-dasharray: 350;
+        stroke-dashoffset: 350;
+    }
+    input[type="checkbox"]:checked + svg .tick{
+        animation: tick .8s ease-in-out;
+        animation-fill-mode: forwards;
+        animation-delay: .95s;
+    }
+    input[type="checkbox"]:checked ~ h2{
+        animation: title .6s ease-in-out;
+        animation-delay: 1.2s;
+        animation-fill-mode: forwards;
+    }
+    /* 圆形动画 */
+    @keyframes circle {
+        from{
+            stroke-dashoffset: 1194; 
+        }
+        to{
+            stroke-dashoffset: 2388; 
+        }
+    }
+    /* 打钩动画 */
+    @keyframes tick {
+        from{
+            stroke-dashoffset: 350; 
+        }
+        to{
+            stroke-dashoffset: 0; 
+        }
+    }
+    /* 标题动画 */
+    @keyframes title {
+        from{
+            opacity: 0; 
+        }
+        to{
+           opacity: 100%;
+        }
+    }
+</style>
